@@ -27,7 +27,7 @@ services:
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
     profiles:
-    - postgres
+    - petclinic
   petclinic:
     build:
       context: .
@@ -39,4 +39,24 @@ services:
     ports:
       - "8080:8080"
     profiles:
-    - postgres
+    - petclinic
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    networks:
+      - mynet
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://postgres:5432/sonarqube
+      - SONARQUBE_JDBC_USERNAME=petclinic
+      - SONARQUBE_JDBC_PASSWORD=petclinic
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    profiles:
+      - petclinic
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
