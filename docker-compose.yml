@@ -1,5 +1,6 @@
 version: "2.2"
-
+networks:
+  mynet:
 services:
   mysql:
     image: mysql:8.0
@@ -19,9 +20,23 @@ services:
     image: postgres:15.3
     ports:
       - "5432:5432"
+    networks:
+      - mynet
     environment:
       - POSTGRES_PASSWORD=petclinic
       - POSTGRES_USER=petclinic
       - POSTGRES_DB=petclinic
+    profiles:
+    - postgres
+  petclinic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: petclinic
+    command: ["java", "-Dspring.profiles.active=postgres", "-jar", "petclinic.jar"]
+    networks:
+      - mynet
+    ports:
+      - "8080:8080"
     profiles:
     - postgres
