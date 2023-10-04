@@ -153,6 +153,7 @@
   </dependencyManagement>
 
   <build>
+    <finalName>petclinic</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
