@@ -1,5 +1,5 @@
 ## Run code scanning with sonarqube for the petclinic java application.
-### Run with docker-compose
+### Setup environment with docker-compose
 ```bash
 docker-compose --profile petclinic up -d
 ```
