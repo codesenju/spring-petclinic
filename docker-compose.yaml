@@ -45,7 +45,7 @@ services:
   petclinic:
     build:
       context: .
-      dockerfile: Dockerfile.petclinic
+      dockerfile: Dockerfile
     image: petclinic
     container_name: petclinic
     depends_on:

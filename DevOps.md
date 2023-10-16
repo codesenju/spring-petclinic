@@ -1,3 +1,10 @@
+## Start k3d local cluster
+```bash
+k3d cluster create jenkins --api-port 6550 \
+                             -p "8081:80@loadbalancer" \
+                             -p "8082-8085:30082-30085@server:0" \
+                             --agents 3
+```
 ## Run code scanning with sonarqube for the petclinic java application.
 ### Setup environment with docker-compose
 ```bash
